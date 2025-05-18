@@ -1,0 +1,13 @@
+# Kazakh–Russian Machine Translation Pipeline
+
+This repository contains code for training and evaluating a machine translation model between Kazakh and Russian using LaBSE filtering and the M2M100 model.
+
+## 🛠️ Setup
+
+Make sure you have all dependencies installed (e.g. `transformers`, `datasets`, `evaluate`, `torch`, `polars`, `tqdm`).
+
+## 🧱 Build & Run
+
+```bash
+make build
+make run

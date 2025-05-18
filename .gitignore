@@ -1,0 +1,13 @@
+*.txt
+*.npy
+*.zip
+*.tar
+*.tar.gz
+*.xml
+*.ru
+*.kk
+cleaned_data/*
+experiments/*
+cache/*
+cachef/*
+__pycache__/*
