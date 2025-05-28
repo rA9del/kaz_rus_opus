@@ -12,9 +12,10 @@ MAX_PAIRS = None
 KK_FILE = "MultiCCAligned.kk-ru.kk"
 RU_FILE = "MultiCCAligned.kk-ru.ru"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print('using', DEVICE)
 # ============================
 
-# 1. Download and unzip if needed
+
 def download_and_extract():
     url = "https://object.pouta.csc.fi/OPUS-MultiCCAligned/v1.1/moses/kk-ru.txt.zip"
     zip_file = "kk-ru.txt.zip"
@@ -28,7 +29,7 @@ def download_and_extract():
     with zipfile.ZipFile(zip_file, 'r') as zip_ref:
         zip_ref.extractall()
 
-# 2. Load aligned sentences
+
 def load_data():
     with open(KK_FILE, encoding="utf-8") as f_kk, \
          open(RU_FILE, encoding="utf-8") as f_ru:
@@ -36,7 +37,7 @@ def load_data():
         ru = [line.strip() for line in f_ru]
     return kk, ru
 
-# 3. Compute similarity scores
+
 def compute_similarity_array(kk_sentences, ru_sentences):
     model = SentenceTransformer('sentence-transformers/LaBSE').to(DEVICE)
 
@@ -68,7 +69,6 @@ if __name__ == "__main__":
     score_array = compute_similarity_array(kk, ru)
     print("Done. Example scores:", score_array[:10])
 
-    # (Optional) Save if needed
     np.save("ru_kk_similarity_scores.npy", score_array)
     np.savetxt("ru_kk_similarity_scores.txt", score_array, fmt="%.6f")
     print(len(score_array <= 0.65))

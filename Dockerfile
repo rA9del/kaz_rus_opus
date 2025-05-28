@@ -17,6 +17,6 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
 COPY . /workspace
 WORKDIR /workspace
 
-RUN conda env create -f environment.yml && \
-    conda init bash
-
+RUN conda init
+RUN conda env create -f environment.yml -n trans
+RUN conda activate trans

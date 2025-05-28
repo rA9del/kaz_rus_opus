@@ -1,5 +1,5 @@
 IMAGE_NAME=adel
-DATA_PATH=/hdd/adel
+DATA_PATH=/hdd2/adel
 
 build:
 	docker build -t $(IMAGE_NAME) .

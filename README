@@ -1,13 +1,93 @@
-# Kazakh–Russian Machine Translation Pipeline
+# 🇰🇿⇄️🇷🇺 Kazakh–Russian Machine Translation Pipeline
 
-This repository contains code for training and evaluating a machine translation model between Kazakh and Russian using LaBSE filtering and the M2M100 model.
+This repository contains code for training and evaluating a **Kazakh–Russian machine translation** model using:
+
+* **LaBSE** for semantic filtering of noisy parallel corpora
+* **M2M100** (by Facebook AI) for multilingual translation
+
+---
 
 ## 🛠️ Setup
 
-Make sure you have all dependencies installed (e.g. `transformers`, `datasets`, `evaluate`, `torch`, `polars`, `tqdm`).
+
+
+
+---
 
 ## 🧱 Build & Run
 
+### 🔧 Build the Docker container
+
 ```bash
 make build
+```
+
+### ▶️ Run the container
+
+```bash
 make run
+```
+
+---
+
+## 📦 Inside the Container
+
+After entering the container:
+
+*check that conda is activated
+
+1. Install packages (if needed):
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. Prepare data splits:
+
+   ```bash
+   python make_splits.py
+   ```
+
+3. Verify and explore data:
+
+   Open and run `data_check.ipynb`
+
+4. Train the model:
+
+   ```bash
+   ./train.sh
+   ```
+
+5. Evaluate and visualize results:
+
+   Open `result.ipynb`
+
+---
+
+## 📁 Project Structure
+
+```
+├── make_splits.py        # Preprocess and filter data
+├── train.sh              # Training script wrapper
+├── data_check.ipynb      # Data inspection notebook
+├── result.ipynb          # Inference & evaluation notebook
+├── requirements.txt      # Python dependencies
+├── Makefile              # Build & run commands
+```
+
+
+---
+##ATTENTION!
+if using pretrained weights, add them accordingly to ./train.sh (currently experiments/ folder)
+
+---
+
+## 📌 Notes
+
+* The training data is filtered using **LaBSE** cosine similarity thresholding to improve translation quality.
+* There are duplicates so data_check.ipynb is necessary.
+* Training takes around 2-7 days.
+* Experiment with different thresholds by modifying `make_splits.py`.
+
+---
+
